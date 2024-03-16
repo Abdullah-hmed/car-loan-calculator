@@ -1,0 +1,1 @@
+A web based car loan calculator. Made for web development practice.
