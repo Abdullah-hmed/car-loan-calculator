@@ -3,24 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Output</title>
 </head>
+
+<body id="output">
+    <div class="vehicle-details">
+        <h3>Vehicle Details</h3>
+        <p id="vehicle-name">vehicle-name</p>
+        <div class="vehicle-price">
+            <p>Price of Vehicle</p>
+            <p id="car-price">car-price</p>
+        </div>
+    </div>
+    <div class="upfront-payment">
+        <h3>Upfront Payment</h3>
+        <div class="vehicle-deposit">
+            <p>Security Deposit</p>
+            <p id="deposit">deposit</p>
+        </div>
+        <div class="processing">
+            <p>Processing Fee</p>
+            <p>Rs. 2,500</p>
+        </div>
+        <div class="total-upfront">
+            <p>Total Upfront</p>
+            <p id="total-price">total-price</p>
+        </div>
+    </div>
+    <div class="monthly-payment">
+        <h3>Monthly Payment</h3>
+        <div class="months">
+            <p>Number of Months</p>
+            <p>12</p>
+        </div>
+        <div class="rent">
+            <p>Rent per month</p>
+            <p id="monthly-rent">monthyl-rent</p>
+        </div>
+    </div>
+</body>
+
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const carType = urlParams.get('carType');
     const vendor = urlParams.get('vendor');
-    const tenure = urlParams.get('tenure');
-    const deposit = urlParams.get('deposit');
-    const carDelivery = urlParams.get('carDelivery');
 
-    document.writeln("<p><b>Car Type:</b> "+carType+"</p>");
-    document.writeln("<p><b>Vendor:</b> "+vendor+"</p>");
-    document.writeln("<p><b>Tenure:</b> "+tenure+"</p>");
-    document.writeln("<p><b>Deposit:</b> "+deposit+"</p>");
-    document.writeln("<p><b>Car Delivery:</b> "+carDelivery+"</p>");
+    const newCar = urlParams.get('new-car');
+    const newTenure = urlParams.get('new-tenure');
+    const newDeposit = urlParams.get('new-deposit');
+    const newCarDelivery = urlParams.get('new-carDelivery');
+    
+    const oldModel = urlParams.get('old-model');
+    const oldCarPrice = urlParams.get('old-car-price');
+    const oldDeposit = urlParams.get('old-deposit');
+    const oldTenure = urlParams.get('old-tenure');
+
+    if(carType === 'new-car'){
+        document.writeln("<p><b>Car Type:</b> "+carType+"</p>");
+        document.writeln("<p><b>Car Name:</b> "+newCar+"</p>");
+        document.writeln("<p><b>Vendor:</b> "+vendor+"</p>");
+        document.writeln("<p><b>Tenure:</b> "+newTenure+"</p>");
+        document.writeln("<p><b>Deposit:</b> "+newDeposit+"</p>");
+        document.writeln("<p><b>Car Delivery:</b> "+newCarDelivery+"</p>");
+
+        document.getElementById('vehicle-name').innerHTML = newCar;
+        document.getElementById('deposit').innerHTML = newDeposit;
+        document.getElementById('total-price').innerHTML = newDeposit; //Need to add prices of cars.
+    } else {
+        document.writeln("<p><b>Car Type:</b> "+carType+"</p>");
+        document.writeln("<p><b>Vendor:</b> "+vendor+"</p>");
+        document.writeln("<p><b>Model:</b> "+oldModel+"</p>");
+        document.writeln("<p><b>Car Price:</b> "+oldCarPrice+"</p>");
+        document.writeln("<p><b>Deposit:</b> "+oldDeposit+"</p>");
+        document.writeln("<p><b>Tenure:</b> "+oldTenure+"</p>");
+    }
 
 </script>
-<body>
-    
-</body>
+
 </html>

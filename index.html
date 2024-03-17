@@ -18,9 +18,18 @@
         if(dropdown.value === "new-car"){
             oldCarOptions.style.display = 'none';
             newCarOptions.style.display = 'flex';
+            var olddropdowns = oldCarOptions.querySelectorAll("select");
+            olddropdowns.forEach(function(dropdown) {
+                dropdown.removeAttribute("required", "required");
+            });
         } else if (dropdown.value === "old-car") {
             oldCarOptions.style.display = 'flex';
             newCarOptions.style.display = 'none';
+            var olddropdowns = oldCarOptions.querySelectorAll("select");
+            var newdropdowns = newCarOptions.querySelectorAll("select");
+            newdropdowns.forEach(function(dropdown) {
+                dropdown.removeAttribute("required", "required");
+            });
         }
     }
 
@@ -57,7 +66,7 @@
 <body>
     <nav>
         <div class="left-elements">
-            <img src="Images/logo.png" alt="Bank Logo" height="60px" style="margin: 5px;">
+            <img src="Images/logo.png" alt="Bank Logo" height="60vw" style="margin: 5px;">
         </div>
         <div class="center-elements">
             <button>Personal</button>
@@ -92,13 +101,13 @@
         <form id="myForm" action="output.html" method="get">
             
             <select name="carType" id="carType" onchange="dropdownSelection()" required>
-                <option value="" selected="selected">Car Type</option>
+                <option value="">Car Type</option>
                 <option value="new-car">New Car</option>
                 <option value="old-car">Old Car</option>
             </select>
     
             <select name="vendor" id="vendor" onchange="populateCars()" required>
-                <option value="" selected="selected">Select Vendor</option>
+                <option value="">Select Vendor</option>
                 <option value="Honda Atlas Cars">Honda Atlas Cars</option>
                 <option value="Indus Motors">Indus Motors</option>
                 <option value="Kia Lucky Motors Pakistan">Kia Lucky Motors Pakistan</option>
@@ -109,11 +118,11 @@
 
             <div class="new-car-options">
                 <select name="new-car" id="new-car">
-                    <option value="" selected="selected">Select Car</option>
+                    <option value="">Select Car</option>
                 </select>
         
                 <select name="new-tenure" id="new-tenure" required>
-                    <option value="" selected="selected">Tenure</option>
+                    <option value="">Tenure</option>
                     <option value="1">1 Year</option>
                     <option value="2">2 Year</option>
                     <option value="3">3 Year</option>
@@ -123,13 +132,18 @@
                 </select>
         
                 <select name="new-deposit" id="new-deposit">
-                    <option value="" selected="selected">Deposit</option>
-        
+                    <option value="">Deposit</option>
+                    <option value="25">25%</option>
+                    <option value="30">30%</option>
+                    <option value="35">35%</option>
+                    <option value="40">40%</option>
+                    <option value="45">45%</option>
+                    <option value="50">50%</option>
         
                 </select>
         
                 <select name="new-carDelivery" id="new-carDelivery" required>
-                    <option value="" selected="selected">Car Delivery</option>
+                    <option value="">Car Delivery</option>
                     <option value="immediate">Immediate</option>
                     <option value="booking">Booking</option>
                 </select>
