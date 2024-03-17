@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output</title>
+</head>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const carType = urlParams.get('carType');
+    const vendor = urlParams.get('vendor');
+    const tenure = urlParams.get('tenure');
+    const deposit = urlParams.get('deposit');
+    const carDelivery = urlParams.get('carDelivery');
+
+    document.writeln("<p><b>Car Type:</b> "+carType+"</p>");
+    document.writeln("<p><b>Vendor:</b> "+vendor+"</p>");
+    document.writeln("<p><b>Tenure:</b> "+tenure+"</p>");
+    document.writeln("<p><b>Deposit:</b> "+deposit+"</p>");
+    document.writeln("<p><b>Car Delivery:</b> "+carDelivery+"</p>");
+
+</script>
+<body>
+    
+</body>
+</html>

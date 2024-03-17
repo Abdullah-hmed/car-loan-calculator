@@ -4,27 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="shortcut icon" href="Images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <title>Calculators | Meezan Bank</title>
 </head>
 <script>
-    window.addEventListener('load', function() {
-    // Get the target element by its ID
-    var targetElement = document.getElementById('myForm');
-
-    // Check if the target element exists
-    if (targetElement) {
-        // Calculate the position of the target element relative to the top of the page
-        var targetPosition = targetElement.offsetTop;
-
-        // Scroll to the target position
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth' // Optional: Add smooth scrolling effect
-        });
+    function dropdownSelection(){
+        const dropdown = document.getElementById('carType');
+        const newCarOptions = document.querySelector('.new-car-options');
+        const oldCarOptions = document.querySelector('.old-car-options');
+        
+        if(dropdown.value === "new-car"){
+            oldCarOptions.style.display = 'none';
+            newCarOptions.style.display = 'flex';
+        } else if (dropdown.value === "old-car") {
+            oldCarOptions.style.display = 'flex';
+            newCarOptions.style.display = 'none';
+        }
     }
-})
+
+    function populateCars() {
+        var subjectObject = {
+            "Honda Atlas Cars": ["Accord", "BR-V CVT S","City 1.2 LS (CVT)","City 1.2 LS (MT)","City 1.5 LS (CVT)","City Aspire 1.5 LAS (CVT)","City Aspire 1.5 LAS (MT)","Civic 1.5L M CVT","Civic 1.5L Oriel M CVT","Civic RS 1.5LL CVT", "HR-V VTI","HR-V VTI S"],
+            "Indus Motors": ["Corolla Altis", "Corolla X Altis Grande","Fortuner V","Hilux Revo G AT","Yaris 1.3 ATIV","Yaris 1.4 ATIV X CVT"],
+            "Kia Lucky Motors Pakistan": ["Carnival GLS+ Executive", "Picanto AT","Sorento 2.4 AWD","Sportage AWD","Stonic EX","Stonic EX Plus"],
+            "Master Motors": ["Alsvin Comfort 1.3MT", "Alsvin Comfort 1.5 DCT A/T","Alsvin Lumiere 1.5 DCT","Changan Karvaan MFV","Karavaan Plus","M9"],
+            "Pak Suzuki Co.": ["Alto VX", "Alto VXL - AGS","Alto VXR","Alto VXR - AGS","Bolan Cargo","Cultus VXL"],
+            "Regal Automobiles": ["Prince Glory 580 Pro", "Prince Humsafar DFSK K07","Prince K01s Pick-Up","Prince Pearl"]
+        }
+
+        const car = document.getElementById('new-car');
+        const vendor = document.getElementById('vendor');
+        const selectedVendor = vendor.value;
+
+        car.innerHTML = "<option value=''>Select Car</option>";
+        if(selectedVendor !== ''){
+            console.log(selectedVendor);
+            var carList = subjectObject[selectedVendor];
+            console.log(carList);
+            carList.forEach(validCar => {
+                const option = document.createElement("option");
+                option.text = validCar;
+                option.value = validCar;
+                car.add(option);
+                // console.log(option);
+            });
+        }
+    };
+
 </script>
 <body>
     <nav>
@@ -46,55 +74,115 @@
         <h1>Meezan Bank Calculators</h1>
         <p>Calculate your Payment Plans for various Products</p>
     </div>
-    <div class="calculator-types-buttons">
-        <button>Car Ijarah</button>
-        <button>Apni Bike</button>
-        <button>Easy Home</button>
-        <button>Meezan Solar</button>
+    <div class="white-background">
+        <div class="calculator-types-buttons">
+            <button>Car Ijarah</button>
+            <button>Apni Bike</button>
+            <button>Easy Home</button>
+            <button>Meezan Solar</button>
+        </div>
+        <div class="page-informative">
+            <p>If you found this page informative, share it now!</p>
+        </div>
+        <hr>
+        <div class="calculator-header">
+            <p style="font-size: 30px;"><b>Car Ijarah Calculator</b></p>
+            <p style="font-size: 20px;">Use our Calculators to Compare Diferent Cars & Payment Plans!</p>
+        </div>
+        <form id="myForm" action="output.html" method="get">
+            
+            <select name="carType" id="carType" onchange="dropdownSelection()" required>
+                <option value="" selected="selected">Car Type</option>
+                <option value="new-car">New Car</option>
+                <option value="old-car">Old Car</option>
+            </select>
+    
+            <select name="vendor" id="vendor" onchange="populateCars()" required>
+                <option value="" selected="selected">Select Vendor</option>
+                <option value="Honda Atlas Cars">Honda Atlas Cars</option>
+                <option value="Indus Motors">Indus Motors</option>
+                <option value="Kia Lucky Motors Pakistan">Kia Lucky Motors Pakistan</option>
+                <option value="Master Motors">Master Motors</option>
+                <option value="Pak Suzuki Co.">Pak Suzuki Co.</option>
+                <option value="Regal Automobiles">Regal Automobiles</option>
+            </select>
+
+            <div class="new-car-options">
+                <select name="new-car" id="new-car">
+                    <option value="" selected="selected">Select Car</option>
+                </select>
+        
+                <select name="new-tenure" id="new-tenure" required>
+                    <option value="" selected="selected">Tenure</option>
+                    <option value="1">1 Year</option>
+                    <option value="2">2 Year</option>
+                    <option value="3">3 Year</option>
+                    <option value="4">4 Year</option>
+                    <option value="5">5 Year</option>
+        
+                </select>
+        
+                <select name="new-deposit" id="new-deposit">
+                    <option value="" selected="selected">Deposit</option>
+        
+        
+                </select>
+        
+                <select name="new-carDelivery" id="new-carDelivery" required>
+                    <option value="" selected="selected">Car Delivery</option>
+                    <option value="immediate">Immediate</option>
+                    <option value="booking">Booking</option>
+                </select>
+            </div>
+
+            <div class="old-car-options">
+                <select name="old-model" id="old-model">
+                    <option value="">Select model</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                </select>
+        
+                <input type="text" name="old-car-price" id="old-car-price" placeholder="Car Price">
+        
+                <select name="old-deposit" id="old-deposit">
+                    <option value="">Deposit</option>
+                    <option value="25">25%</option>
+                    <option value="30">30%</option>
+                    <option value="35">35%</option>
+                    <option value="40">40%</option>
+                    <option value="45">45%</option>
+                    <option value="50">50%</option>
+        
+                </select>
+        
+                <select name="old-tenure" id="old-tenure" required>
+                    <option value="">Tenure</option>
+                    <option value="1 year">1 Year</option>
+                    <option value="2 year">2 Year</option>
+                    <option value="3 year">3 Year</option>
+                    <option value="4 year">4 Year</option>
+                    <option value="5 year">5 Year</option>
+                    <option value="6 year">6 Year</option>
+                    <option value="7 year">7 Year</option>
+                    
+                </select>
+            </div>
+    
+            <button type="submit">Calculate</button>
+        </form>
+        <div class="note">
+            <p><i>Note: Cars are being offered for a tenure of Five years under the name Regal Automobiles Industries Ltd.<br>New locally assembled cars i.e Toyota, Honda, Suzuki and KIA are being offered to Roshan Digital Account holders under Meezan Car Ijarah</i></p>
+        </div>
+        <div class="footer">
+            <button><i class="fa-solid fa-location-dot"></i> Locate a Branch</button>
+            <button><i class="fa-solid fa-phone"></i> Contact Us</button>
+            <button><i class="fa-solid fa-briefcase"></i> Careers</button>
+            <button><i class="fa-solid fa-handshake"></i> Investor Relations</button>
+        </div>
     </div>
-    <div class="page-informative">
-        <p>If you found this page informative, share it now!</p>
-    </div>
-    <hr>
-    <div class="calculator-header">
-        <p style="font-size: 30px;"><b>Car Ijarah Calculator</b></p>
-        <p style="font-size: 20px;">Use out Calculators to Compare Diferent Cars & Payment Plans!</p>
-    </div>
-    <form id="myForm" action="2.html" method="get">
-        <select name="dropdown" id="dropdown">
-            <option value="new-car">New Car</option>
-            <option value="old-car">Old Car</option>
-        </select>
-
-        <select name="Select Vendor" id="selectVendor">
-            <option value="" selected disabled hidden>Select Vendor</option>
-            <option value="honda-atlas">Honda Atlas Cars</option>
-            <option value="indus-motors">Indus Motors</option>
-            <option value="kia">Kia Lucky Motors</option>
-            <option value="master-motors">Master Motors</option>
-            <option value="pak-suzuki">Pak Suzuki Co.</option>
-            <option value="regal-auto">Regal Automobiles</option>
-        </select>
-
-        <select name="Tenure" id="tenure">
-            <option value="" selected disabled hidden>Tenure</option>
-
-
-        </select>
-
-        <select name="Deposit" id="deposit">
-            <option value="" selected disabled hidden>Deposit</option>
-
-
-        </select>
-
-        <select name="Car Delivery" id="car-delivery">
-            <option value="" selected disabled hidden>Car Deivery</option>
-
-
-        </select>
-
-        <button type="submit">Calculate</button>
-    </form>
 </body>
 </html>
