@@ -12,10 +12,11 @@ body {
     text-align: center;
 }
 
-.vehicle-price, .vehicle-deposit, .processing, .total-upfront, .months, .rent {
+.vehicle-price, .vehicle-deposit, .processing, .total-upfront, .months, .rent, .eval{
     display: flex;
-    justify-content: space-evenly;
-    
+    justify-content: space-between;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 button {
@@ -55,6 +56,7 @@ nav {
 #login-button:hover span {
     color: #701e7d;
 }
+
 
 .center-elements button {
     height: 100%;

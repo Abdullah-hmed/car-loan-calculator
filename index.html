@@ -35,12 +35,58 @@
 
     function populateCars() {
         var subjectObject = {
-            "Honda Atlas Cars": ["Accord", "BR-V CVT S","City 1.2 LS (CVT)","City 1.2 LS (MT)","City 1.5 LS (CVT)","City Aspire 1.5 LAS (CVT)","City Aspire 1.5 LAS (MT)","Civic 1.5L M CVT","Civic 1.5L Oriel M CVT","Civic RS 1.5LL CVT", "HR-V VTI","HR-V VTI S"],
-            "Indus Motors": ["Corolla Altis", "Corolla X Altis Grande","Fortuner V","Hilux Revo G AT","Yaris 1.3 ATIV","Yaris 1.4 ATIV X CVT"],
-            "Kia Lucky Motors Pakistan": ["Carnival GLS+ Executive", "Picanto AT","Sorento 2.4 AWD","Sportage AWD","Stonic EX","Stonic EX Plus"],
-            "Master Motors": ["Alsvin Comfort 1.3MT", "Alsvin Comfort 1.5 DCT A/T","Alsvin Lumiere 1.5 DCT","Changan Karvaan MFV","Karavaan Plus","M9"],
-            "Pak Suzuki Co.": ["Alto VX", "Alto VXL - AGS","Alto VXR","Alto VXR - AGS","Bolan Cargo","Cultus VXL"],
-            "Regal Automobiles": ["Prince Glory 580 Pro", "Prince Humsafar DFSK K07","Prince K01s Pick-Up","Prince Pearl"]
+            "Honda Atlas Cars": [
+                {name: "Accord", price:10000},
+                {name: "BR-V CVT S",price:10000},
+                {name: "City 1.2 LS (CVT)",price:10000},
+                {name: "City 1.2 LS (MT)",price:10000},
+                {name: "City 1.5 LS (CVT)",price:10000},
+                {name: "City Aspire 1.5 LAS (CVT)",price:10000},
+                {name: "City Aspire 1.5 LAS (MT)",price:10000},
+                {name: "Civic 1.5L M CVT",price:10000},
+                {name: "Civic 1.5L Oriel M CVT",price:10000},
+                {name: "Civic RS 1.5LL CVT",price:10000},
+                {name: "HR-V VTI",price:10000},
+                {name: "HR-V VTI S",price:10000}
+            ],
+            "Indus Motors": [
+                {name:"Corolla Altis", price:10000},
+                {name:"Corolla X Altis Grande",price:10000},
+                {name:"Fortuner V",price:10000},
+                {name:"Hilux Revo G AT",price:10000},
+                {name:"Yaris 1.3 ATIV",price:10000},
+                {name:"Yaris 1.4 ATIV X CVT",price:10000}
+            ],
+            "Kia Lucky Motors Pakistan": [
+                {name:"Carnival GLS+ Executive", price:10000},
+                {name:"Picanto AT", price:10000},
+                {name:"Sorento 2.4 AWD", price:10000},
+                {name:"Sportage AWD", price:10000},
+                {name:"Stonic EX", price:10000},
+                {name:"Stonic EX Plus", price:10000},
+            ],
+            "Master Motors": [
+                {name:"Alsvin Comfort 1.3MT", price:10000},
+                {name:"Alsvin Comfort 1.5 DCT A/T",price:10000},
+                {name:"Alsvin Lumiere 1.5 DCT",price:10000},
+                {name:"Changan Karvaan MFV",price:10000},
+                {name:"Karavaan Plus",price:10000},
+                {name:"M9",price:10000},
+            ],
+            "Pak Suzuki Co.": [
+                {name:"Alto VX", price:10000},
+                {name:"Alto VXL - AGS",price:10000},
+                {name:"Alto VXR",price:10000},
+                {name:"Alto VXR - AGS",price:10000},
+                {name:"Bolan Cargo",price:10000},
+                {name:"Cultus VXL",price:10000},
+            ],
+            "Regal Automobiles": [
+                {name:"Prince Glory 580 Pro", price:10000},
+                {name:"Prince Humsafar DFSK K07", price:10000},
+                {name:"Prince K01s Pick-Up", price:10000},
+                {name:"Prince Pearl", price:10000},
+            ]
         }
 
         const car = document.getElementById('new-car');
@@ -54,8 +100,8 @@
             console.log(carList);
             carList.forEach(validCar => {
                 const option = document.createElement("option");
-                option.text = validCar;
-                option.value = validCar;
+                option.text = validCar.name;
+                option.value = validCar.name +" - "+validCar.price;
                 car.add(option);
                 // console.log(option);
             });
@@ -175,13 +221,13 @@
         
                 <select name="old-tenure" id="old-tenure" required>
                     <option value="">Tenure</option>
-                    <option value="1 year">1 Year</option>
-                    <option value="2 year">2 Year</option>
-                    <option value="3 year">3 Year</option>
-                    <option value="4 year">4 Year</option>
-                    <option value="5 year">5 Year</option>
-                    <option value="6 year">6 Year</option>
-                    <option value="7 year">7 Year</option>
+                    <option value="1">1 Year</option>
+                    <option value="2">2 Year</option>
+                    <option value="3">3 Year</option>
+                    <option value="4">4 Year</option>
+                    <option value="5">5 Year</option>
+                    <option value="6">6 Year</option>
+                    <option value="7">7 Year</option>
                     
                 </select>
             </div>

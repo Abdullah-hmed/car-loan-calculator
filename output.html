@@ -6,40 +6,64 @@
     <link rel="stylesheet" href="style.css">
     <title>Output</title>
 </head>
+<style>
+    b{
+        color: #701e7d;
+    }
+    p{
+        font-size: 3vw;
+    }
+    h3{
+        font-size: 5vw;
+    }
 
+    @media screen and (min-width: 768px) {
+    p {
+        font-size: 1.25vw; /* Adjust font size for larger screens */
+    }
+
+    h3 {
+        font-size: 2vw; /* Adjust heading size for larger screens */
+    }
+}
+</style>
 <body id="output">
     <div class="vehicle-details">
         <h3>Vehicle Details</h3>
         <p id="vehicle-name">vehicle-name</p>
         <div class="vehicle-price">
-            <p>Price of Vehicle</p>
+            <p><b>Price of Vehicle</b></p>
             <p id="car-price">car-price</p>
         </div>
     </div>
     <div class="upfront-payment">
         <h3>Upfront Payment</h3>
         <div class="vehicle-deposit">
-            <p>Security Deposit</p>
+            <p><b>Security Deposit</b></p>
             <p id="deposit">deposit</p>
         </div>
         <div class="processing">
-            <p>Processing Fee</p>
+            <p><b>Processing Fee</b></p>
             <p>Rs. 2,500</p>
         </div>
+        <div class="eval">
+            <p><b>Evaluation Fee</b></p>
+            <p>Rs. 2,000</p>
+        </div>
         <div class="total-upfront">
-            <p>Total Upfront</p>
+            <p><b>Total Upfront</b></p>
             <p id="total-price">total-price</p>
         </div>
     </div>
     <div class="monthly-payment">
         <h3>Monthly Payment</h3>
         <div class="months">
-            <p>Number of Months</p>
-            <p>12</p>
+            <p><b>Number of Months</b></p>
+            <p id="tenure">12</p>
         </div>
         <div class="rent">
-            <p>Rent per month</p>
-            <p id="monthly-rent">monthyl-rent</p>
+            <p><b>Rent per month</b></p>
+            <p id="monthly-rent">monthly-rent</p>
         </div>
     </div>
 </body>
@@ -50,33 +74,48 @@
     const vendor = urlParams.get('vendor');
 
     const newCar = urlParams.get('new-car');
-    const newTenure = urlParams.get('new-tenure');
-    const newDeposit = urlParams.get('new-deposit');
-    const newCarDelivery = urlParams.get('new-carDelivery');
+
+    const [carName, car_Price] = newCar.split(' - ');
     
-    const oldModel = urlParams.get('old-model');
-    const oldCarPrice = urlParams.get('old-car-price');
-    const oldDeposit = urlParams.get('old-deposit');
-    const oldTenure = urlParams.get('old-tenure');
+    
+    
 
     if(carType === 'new-car'){
-        document.writeln("<p><b>Car Type:</b> "+carType+"</p>");
-        document.writeln("<p><b>Car Name:</b> "+newCar+"</p>");
-        document.writeln("<p><b>Vendor:</b> "+vendor+"</p>");
-        document.writeln("<p><b>Tenure:</b> "+newTenure+"</p>");
-        document.writeln("<p><b>Deposit:</b> "+newDeposit+"</p>");
-        document.writeln("<p><b>Car Delivery:</b> "+newCarDelivery+"</p>");
+        carPrice = parseInt(car_Price);
+        const newTenure = urlParams.get('new-tenure');
+        const newDeposit = urlParams.get('new-deposit');
+        const newCarDelivery = urlParams.get('new-carDelivery');
+        const depositCalc = (carPrice*newDeposit)/100;
 
-        document.getElementById('vehicle-name').innerHTML = newCar;
-        document.getElementById('deposit').innerHTML = newDeposit;
-        document.getElementById('total-price').innerHTML = newDeposit; //Need to add prices of cars.
+        document.getElementById('vehicle-name').innerHTML = carName;
+        document.getElementById('car-price').innerHTML = 'Rs. '+carPrice.toLocaleString();
+        document.getElementById('deposit').innerHTML = 'Rs. '+depositCalc.toLocaleString()+' ('+newDeposit+'%)';
+        document.getElementById('total-price').innerHTML = 'Rs. '+(depositCalc+2500).toLocaleString();
+        document.querySelector('.eval').style.display = 'none';
+        document.getElementById('tenure').innerHTML = parseInt(newTenure)*12;
+        const monthlyRent = (carPrice - depositCalc)/(newTenure*12); //rent formula
+        console.log(monthlyRent);
+
+        document.getElementById('monthly-rent').innerHTML = 'Rs. '+monthlyRent.toLocaleString();
+
     } else {
-        document.writeln("<p><b>Car Type:</b> "+carType+"</p>");
-        document.writeln("<p><b>Vendor:</b> "+vendor+"</p>");
-        document.writeln("<p><b>Model:</b> "+oldModel+"</p>");
-        document.writeln("<p><b>Car Price:</b> "+oldCarPrice+"</p>");
-        document.writeln("<p><b>Deposit:</b> "+oldDeposit+"</p>");
-        document.writeln("<p><b>Tenure:</b> "+oldTenure+"</p>");
+        const oldModel = urlParams.get('old-model');
+        const carPrice = urlParams.get('old-car-price');
+        const oldCarPrice = parseInt(carPrice);
+        const oldDeposit = urlParams.get('old-deposit');
+        const depositCalc = (oldCarPrice*oldDeposit)/100;
+        const oldTenure = urlParams.get('old-tenure');
+
+        document.getElementById('vehicle-name').style.display = 'none'; //Removing vehicle name attribute
+        document.getElementById('tenure').innerHTML = parseInt(oldTenure)*12;
+        document.getElementById('car-price').innerHTML = 'Rs. '+oldCarPrice.toLocaleString();
+        document.getElementById('deposit').innerHTML = 'Rs. '+depositCalc.toLocaleString()+' ('+oldDeposit+'%)';
+        document.getElementById('total-price').innerHTML = 'Rs. '+(depositCalc+5500).toLocaleString();
+
+        const monthlyRent = (oldCarPrice - depositCalc)/(oldTenure*12); //rent formula
+        console.log(monthlyRent);
+
+        document.getElementById('monthly-rent').innerHTML = 'Rs. '+monthlyRent.toLocaleString();
     }
 
 </script>
